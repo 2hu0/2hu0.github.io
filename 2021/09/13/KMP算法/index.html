@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="单链表的冒泡排序, 2hu0のBlog">
+    <meta name="keywords" content="KMP算法思路归纳, 2hu0のBlog">
     <meta name="description" content="123">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>单链表的冒泡排序 | 2hu0のBlog</title>
+    <title>KMP算法思路归纳 | 2hu0のBlog</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -315,7 +315,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">单链表的冒泡排序</h1>
+                    <h1 class="description center-align post-title">KMP算法思路归纳</h1>
                 </div>
             </div>
         </div>
@@ -447,7 +447,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-09-12
+                    2021-09-13
                 </div>
                 
 
@@ -456,14 +456,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.1k
+                    1.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    6 分
                 </div>
                 
 
@@ -486,95 +486,120 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>冒泡排序是最基本也是最简单的一种排序，时间复杂度为O(n^2)，我们可以使用它来对单链表进行排序操作。</p>
-<h2 id="链表定义"><a href="#链表定义" class="headerlink" title="链表定义"></a>链表定义</h2><p>本次链表采用以下的结构定义：</p>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">node</span><span class="token punctuation">&#123;</span>
-	<span class="token keyword">int</span> element<span class="token punctuation">;</span>
-	<span class="token keyword">struct</span> <span class="token class-name">node</span> <span class="token operator">*</span>link<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>Node<span class="token punctuation">;</span>
-<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">headerList</span><span class="token punctuation">&#123;</span>
-	Node <span class="token operator">*</span>head<span class="token punctuation">;</span>
-	<span class="token keyword">int</span> n<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>HeaderList<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="算法一"><a href="#算法一" class="headerlink" title="算法一"></a>算法一</h2><p>冒泡排序算法的原始思想：<br>比较相邻的元素。如果第一个比第二个大，就交换他们两个。对每一对相邻元素做同样的工作，从开始第一对到结尾的最后一对。在这一点，最后的元素应该会是最大的数。针对所有的元素重复以上的步骤，除了最后一个。</p>
-<h3 id="数组代码实现"><a href="#数组代码实现" class="headerlink" title="数组代码实现"></a>数组代码实现</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">sort</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">int</span> length<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">int</span> i<span class="token punctuation">,</span> j<span class="token punctuation">,</span> temp<span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span>j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> length <span class="token operator">-</span> <span class="token number">1</span> <span class="token operator">-</span> j<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-            <span class="token keyword">if</span><span class="token punctuation">(</span>a<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">></span> a<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-                temp <span class="token operator">=</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-                a<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> a<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-                a<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> temp<span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
+                <p>今天学习了判断字符串匹配操作中的kmp算法，现对此进行一个简单的梳理和归纳，思路主要来源于知乎上对kmp算法的几篇详细分析文章：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/21923021">https://www.zhihu.com/question/21923021</a> 另外B站上也有kmp算法的视频演示教学： <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1jb411V78H?from=search&amp;seid=13467499309274367749&amp;spm_id_from=333.337.0.0">https://www.bilibili.com/video/BV1jb411V78H?from=search&amp;seid=13467499309274367749&amp;spm_id_from=333.337.0.0</a></p>
+<h2 id="字符串的匹配问题"><a href="#字符串的匹配问题" class="headerlink" title="字符串的匹配问题"></a>字符串的匹配问题</h2><p>字符串的匹配是对字符串的常见操作，具体来说就是：给定字符串A和B，让我们来判断B是否为A的字串，如果是，B出现在A串的什么位置？其中，A称作<strong>主串</strong>，B称作<strong>模式串</strong>。</p>
+<p><img src="https://pic.imgdb.cn/item/613f760644eaada739c7ca14.png"></p>
+<h2 id="BF算法-Brute-Force"><a href="#BF算法-Brute-Force" class="headerlink" title="BF算法(Brute-Force)"></a>BF算法(Brute-Force)</h2><p>在谈及Kmp算法之前，我们需要先了解一下BF算法，这样才能让KMP的算法优势更为明显。Brute—Force，顾名思义，这是一种暴力的解法。其思路也很简单：给定主串A和模式串B，将A和B的每个字符逐个比较，如果一致则继续比较下一个字符，当匹配到不一致时就将模式串后移一位，然后重新从模式串的首位开始对比，重复先前步骤。</p>
+<p><img src="https://pic.imgdb.cn/item/613f760644eaada739c7ca4d.png"></p>
+<p><img src="https://pic.imgdb.cn/item/613f760644eaada739c7cbc0.png"></p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>例子：给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回 -1。</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">strStr</span><span class="token punctuation">(</span><span class="token class-name">String</span> haystack<span class="token punctuation">,</span> <span class="token class-name">String</span> needle<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> haylen <span class="token operator">=</span> haystack<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> needlen <span class="token operator">=</span> needle<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+        <span class="token comment">//特殊情况</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>haylen <span class="token operator">&lt;</span> needlen<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
         <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>将上述思想套用到链表中，我们知道在冒泡排序中要交换数据，所以链表中需要通过指针指向的改变来达到交换的目的，而不是简单节点数据交换。两个节点要想交换位置，必须用2个以上的指针来表明指示要交换节点的前驱和本身，必要时用到后继指针。</p>
-<h3 id="链表冒泡排序"><a href="#链表冒泡排序" class="headerlink" title="链表冒泡排序"></a>链表冒泡排序</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">bubbleSort</span><span class="token punctuation">(</span>HeaderList <span class="token operator">&amp;</span>L<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>L<span class="token punctuation">.</span>head<span class="token operator">-></span>link<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        cout <span class="token operator">&lt;&lt;</span> <span class="token string">"该链表无节点！"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-        <span class="token keyword">return</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    Node<span class="token operator">*</span> tail <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>   <span class="token comment">//（tail指向上一轮找出最大值的位置）</span>
-    <span class="token keyword">while</span> <span class="token punctuation">(</span>tail <span class="token operator">!=</span> L<span class="token punctuation">.</span>head<span class="token operator">-></span>link<span class="token operator">-></span>link<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">//最大值已到链表第二位置</span>
-        Node<span class="token operator">*</span> p <span class="token operator">=</span> L<span class="token punctuation">.</span>head<span class="token punctuation">;</span>  <span class="token comment">//外循环开始，先指向头节点</span>
-        Node<span class="token operator">*</span> q <span class="token operator">=</span> p<span class="token operator">-></span>link<span class="token punctuation">;</span>  
-        <span class="token keyword">while</span> <span class="token punctuation">(</span>q<span class="token operator">-></span>link <span class="token operator">!=</span> tail<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>   <span class="token comment">//下个节点是上一轮最大值的位置</span>
-			<span class="token keyword">if</span> <span class="token punctuation">(</span>q<span class="token operator">-></span>element <span class="token operator">></span> q<span class="token operator">-></span>link<span class="token operator">-></span>element<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> 
-                p<span class="token operator">-></span>link <span class="token operator">=</span> q<span class="token operator">-></span>link<span class="token punctuation">;</span> <span class="token comment">//让当前节点的先驱指向相邻的节点</span>
-                Node<span class="token operator">*</span> temp <span class="token operator">=</span> q<span class="token operator">-></span>link<span class="token operator">-></span>link<span class="token punctuation">;</span> <span class="token comment">//保存相邻节点的后继</span>
-                p<span class="token operator">-></span>link<span class="token operator">-></span>link <span class="token operator">=</span> q<span class="token punctuation">;</span>     <span class="token comment">//令相邻节点的后继等于当前节点</span>
-                q<span class="token operator">-></span>link <span class="token operator">=</span> temp<span class="token punctuation">;</span>  <span class="token comment">//当前节点指向先前保存的后继</span>
-                p <span class="token operator">=</span> p<span class="token operator">-></span>link<span class="token punctuation">;</span>   <span class="token comment">//因为mid交换以后，已经后移了一步，所以这里只需前驱后移</span>
-            <span class="token punctuation">&#125;</span>
-            <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>         <span class="token comment">//未交换，手动后移这两个指针</span>
-                p <span class="token operator">=</span> q<span class="token punctuation">;</span>
-                q <span class="token operator">=</span> q<span class="token operator">-></span>link<span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>needlen <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
         <span class="token punctuation">&#125;</span>
-        tail <span class="token operator">=</span> q<span class="token punctuation">;</span>   <span class="token comment">//tail指向这一轮找出最大值的位置。</span>
-    <span class="token punctuation">&#125;</span> 
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="算法二"><a href="#算法二" class="headerlink" title="算法二"></a>算法二</h2><p> 另一种冒泡排序的思想，从所有的第一个开始，以第一个为基准，与剩余所有的数比较，选出最小的放在第一位，之后以第二个位置为基准，与剩余所有的数比较，选出最小的放在第二位，直到全部遍历完。</p>
-<h3 id="数组代码实现-1"><a href="#数组代码实现-1" class="headerlink" title="数组代码实现"></a>数组代码实现</h3> <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">sort</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-   <span class="token keyword">int</span> i<span class="token punctuation">,</span> j<span class="token punctuation">,</span> temp<span class="token punctuation">;</span>
-   <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-       <span class="token keyword">for</span> <span class="token punctuation">(</span>j <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> n <span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-           <span class="token keyword">if</span><span class="token punctuation">(</span>a<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">&lt;</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-               temp <span class="token operator">=</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
-               a<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> a<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
-               a<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> temp<span class="token punctuation">;</span>
-           <span class="token punctuation">&#125;</span>
-       <span class="token punctuation">&#125;</span>
-   <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="链表冒泡排序-1"><a href="#链表冒泡排序-1" class="headerlink" title="链表冒泡排序"></a>链表冒泡排序</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">bubbleSort</span><span class="token punctuation">(</span>HeaderList <span class="token operator">&amp;</span>L<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>L<span class="token punctuation">.</span>head<span class="token operator">-></span>link<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        cout <span class="token operator">&lt;&lt;</span> <span class="token string">"该链表无节点！"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-        <span class="token keyword">return</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-	Node<span class="token operator">*</span> pre <span class="token operator">=</span> L<span class="token punctuation">.</span>head<span class="token punctuation">;</span>    
-    Node<span class="token operator">*</span> mid <span class="token operator">=</span> pre<span class="token operator">-></span>link<span class="token punctuation">,</span> <span class="token operator">*</span>after<span class="token punctuation">,</span><span class="token operator">*</span>afterPre<span class="token punctuation">,</span><span class="token operator">*</span>temp<span class="token punctuation">;</span><span class="token comment">//指向第一个节点，声明内循环中要用的指针</span>
-    <span class="token keyword">while</span> <span class="token punctuation">(</span>mid<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>          
-        after <span class="token operator">=</span> mid<span class="token operator">-></span>link<span class="token punctuation">;</span>  <span class="token comment">//冒泡第二种形式的思想，让外循环的一个节点与剩余的所有节点比较</span>
-        afterPre <span class="token operator">=</span> mid<span class="token punctuation">;</span>     <span class="token comment">//该节点的前驱指针，方便我们进行交换</span>
-        <span class="token keyword">while</span> <span class="token punctuation">(</span>after<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>     <span class="token comment">//</span>
-			<span class="token keyword">if</span> <span class="token punctuation">(</span>mid<span class="token operator">-></span>element <span class="token operator">></span> after<span class="token operator">-></span>element<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> 
-                afterPre<span class="token operator">-></span>link <span class="token operator">=</span> mid<span class="token punctuation">;</span>       
-                pre<span class="token operator">-></span>link <span class="token operator">=</span> after<span class="token punctuation">;</span>         <span class="token comment">//首先让这两个节点的前驱变了</span>
-                temp <span class="token operator">=</span> mid<span class="token operator">-></span>link<span class="token punctuation">;</span>         <span class="token comment">//保留外循环中要比较的节点的后继，方便交换过来的节点正确的接上</span>
-                mid<span class="token operator">-></span>link <span class="token operator">=</span> after<span class="token operator">-></span>link<span class="token punctuation">;</span>  <span class="token comment">//接上交换过来的后继位置</span>
-                after<span class="token operator">-></span>link <span class="token operator">=</span> temp<span class="token punctuation">;</span>      <span class="token comment">//接上交换过来的后继位置</span>
-                temp <span class="token operator">=</span> mid<span class="token punctuation">;</span>       <span class="token comment">//mid 和 after 所指向的节点在 链表中已交换位置，所以mid和after指针的地址交换</span>
-                mid <span class="token operator">=</span> after<span class="token punctuation">;</span>     <span class="token comment">//</span>
-                after <span class="token operator">=</span> mid<span class="token punctuation">;</span>    <span class="token comment">//将mid和after的指针的值交换，才能继续以mid所指向的节点当作外循环的基准节点</span>
-                               <span class="token comment">//after才能正确作为内循环要移动并比较的节点指针。</span>
+        <span class="token comment">//主串</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> haylen <span class="token operator">-</span> needlen <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">int</span> j<span class="token punctuation">;</span>
+            <span class="token comment">//模式串</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span>j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> needlen<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token comment">//不符合的情况，直接跳出，主串指针后移一位</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>haystack<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>i<span class="token operator">+</span>j<span class="token punctuation">)</span> <span class="token operator">!=</span> needle<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
             <span class="token punctuation">&#125;</span>
-            afterPre <span class="token operator">=</span> after<span class="token punctuation">;</span>   
-            after <span class="token operator">=</span> after<span class="token operator">-></span>link<span class="token punctuation">;</span>  <span class="token comment">//后移前驱和本身</span>
+            <span class="token comment">//匹配成功</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>j <span class="token operator">==</span> needlen<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">return</span> i<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span> 
+
         <span class="token punctuation">&#125;</span>
-        pre <span class="token operator">=</span> mid<span class="token punctuation">;</span> 
-        mid <span class="token operator">=</span> mid<span class="token operator">-></span>link<span class="token punctuation">;</span>  <span class="token comment">//外循环需要后移一步，继续下一轮内循环遍历</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="BF算法时间复杂度讨论及改进思路"><a href="#BF算法时间复杂度讨论及改进思路" class="headerlink" title="BF算法时间复杂度讨论及改进思路"></a>BF算法时间复杂度讨论及改进思路</h3><p>设主串长度为n，模式串长度为m，在BF算法中，完成一趟匹配至少要进行一次比较，最多要进行m次比较。BF算法最多进行n-m+1趟匹配，因此最坏情况下一共要进行m(n-m+1)次比较，考虑到主串的长度应远大于模式穿，所以时间复杂度为*<em>O(m</em>n)**。最坏情况是每一趟匹配都在最后一个字符失配，如a=”cccccc”, b=”ccb”。</p>
+<p>改进思路：BF算法的缺点很明显，那就是进行了太多没必要的比较。因此，我们考虑<strong>降低比较的趟数</strong>，有些趟字符串比较是有可能会成功的；有些则毫无可能。如果我们跳过那些绝不可能成功的字符串比较，就可以减少不必要的比较趟数来降低算法的复杂度。</p>
+<h2 id="KMP算法"><a href="#KMP算法" class="headerlink" title="KMP算法"></a>KMP算法</h2><h3 id="前缀和后缀"><a href="#前缀和后缀" class="headerlink" title="前缀和后缀"></a>前缀和后缀</h3><p>在使用KMP算法之前，我们需要了解几个概念：前缀、后缀、相同前后缀的最大长。</p>
+<p>abcdef的前缀：a、ab、abc、abcd、abcde（注意：abcdef不是前缀）<br>abcdef的后缀：f、ef、def、cdef、bcdef（注意：abcdef不是后缀）<br>abcdef的公共最大长：0（因为其前缀与后缀没有相同的）<br>ababa的前缀：a、ab、aba、abab<br>ababa的后缀：a、ba、aba、baba<br>ababa的相同前后缀的最大长：3（因为他们的公共前缀后缀中最长的为aba，长度3）</p>
+<h3 id="利用用相同前后缀的最大长度设计KMP算法"><a href="#利用用相同前后缀的最大长度设计KMP算法" class="headerlink" title="利用用相同前后缀的最大长度设计KMP算法"></a>利用用相同前后缀的最大长度设计KMP算法</h3><p>如下图所示，模式串在与主串配对中，当i指向a，j指向c时失配，那么主串和模式串的前6位是相同的。又因为模式串的前6位，它的它的前4位前缀和后4位后缀是相同的，因此主串i之前的4位和模式串的开头4位是相同的。因此我们只需要将j移动到最大相同前后缀中，<strong>前缀的末尾字符的后一位</strong>，再次和i指向的字符进行逐个比对即可。因此，问题转变成了如何来求解j指向字符之前的子串的最长公共前后缀的长度呢？因为有了这个长度，我们才能知道到底要移动多少位置。因此，我们就要去了解kmp算法的核心——next数组的求解。<br><img src="https://pic2.zhimg.com/80/v2-03a0d005badd0b8e7116d8d07947681c_720w.jpg?source=1940ef5c"></p>
+<h3 id="next数组"><a href="#next数组" class="headerlink" title="next数组"></a>next数组</h3><p>KMP中有一个数组，这个数组叫做next数组，它存放的是最长公共前后缀中，前缀的结尾字符下标。如下图示：  </p>
+<p><img src="https://pic.imgdb.cn/item/613f760644eaada739c7cc28.png"><br>学会使用了next数组后，我们就可以利用它完成KMP算法。  </p>
+<p><img src="https://pica.zhimg.com/80/v2-1103f9e0dde26da60c503e8f1f7bb01e_720w.jpg?source=1940ef5c"></p>
+<p><img src="https://pic3.zhimg.com/80/v2-cee0b1ab9afd304229d3b271475240b4_720w.jpg?source=1940ef5c"></p>
+<h3 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h3><p>下面给出KMP算法的Java语言实现：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">KmpTest</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span>  <span class="token keyword">int</span> <span class="token function">strStr</span><span class="token punctuation">(</span><span class="token class-name">String</span> haystack<span class="token punctuation">,</span> <span class="token class-name">String</span> needle<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">//haystack为主串 needle为模式串</span>
+        <span class="token comment">//两种特殊情况</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>needle<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>haystack<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token comment">// char 数组</span>
+        <span class="token keyword">char</span><span class="token punctuation">[</span><span class="token punctuation">]</span> hasyarr <span class="token operator">=</span> haystack<span class="token punctuation">.</span><span class="token function">toCharArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">char</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nearr <span class="token operator">=</span> needle<span class="token punctuation">.</span><span class="token function">toCharArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//长度</span>
+        <span class="token keyword">int</span> halen <span class="token operator">=</span> hasyarr<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+        <span class="token keyword">int</span> nelen <span class="token operator">=</span> nearr<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+        <span class="token comment">//返回下标</span>
+        <span class="token keyword">return</span> <span class="token function">kmp</span><span class="token punctuation">(</span>hasyarr<span class="token punctuation">,</span> halen<span class="token punctuation">,</span> nearr<span class="token punctuation">,</span> nelen<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">kmp</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">[</span><span class="token punctuation">]</span> hasyarr<span class="token punctuation">,</span> <span class="token keyword">int</span> halen<span class="token punctuation">,</span> <span class="token keyword">char</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nearr<span class="token punctuation">,</span> <span class="token keyword">int</span> nelen<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">//获取next数组</span>
+        <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> next <span class="token operator">=</span> <span class="token function">next</span><span class="token punctuation">(</span>nearr<span class="token punctuation">,</span> nelen<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> halen<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">/*发现不匹配的字符，然后根据next数组移动指针，移动到最大公共前后缀的
+            前缀的后一位*/</span>
+            <span class="token keyword">while</span> <span class="token punctuation">(</span>j <span class="token operator">></span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> hasyarr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> nearr<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                j <span class="token operator">=</span> next<span class="token punctuation">[</span>j <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                <span class="token comment">//如果已经超出长度，直接返回不存在</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>nelen <span class="token operator">-</span> j <span class="token operator">+</span> i <span class="token operator">></span> halen<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token comment">//如果相同就将指针同时向后移动，比较下个字符。</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>hasyarr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> nearr<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token operator">++</span>j<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token comment">//遍历完整个模式串，返回模式串的起点下标</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>j <span class="token operator">==</span> nelen<span class="token punctuation">)</span>
+                <span class="token keyword">return</span> i <span class="token operator">-</span> nelen <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token comment">//若遍历完全部都没有匹配 那就从这里返回-1 匹配失败</span>
+        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+
+    <span class="token keyword">public</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">[</span><span class="token punctuation">]</span> needle<span class="token punctuation">,</span> <span class="token keyword">int</span> len<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">//定义next数组</span>
+        <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> next <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span>len<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token comment">//初始化</span>
+        next<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> k <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token comment">/*初始化k+1为串首字符的下标，needle[i]始终为子串的串尾
+        下标。先通过k比较首字符，当首字符比较完毕后来判断剩余字符*/</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span>len <span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+
+            <span class="token keyword">while</span> <span class="token punctuation">(</span>k <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token operator">&amp;&amp;</span> needle<span class="token punctuation">[</span>k <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">!=</span> needle<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                k <span class="token operator">=</span> next<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+
+            <span class="token keyword">if</span><span class="token punctuation">(</span>needle<span class="token punctuation">[</span>k<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">==</span>needle<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+                k<span class="token operator">++</span><span class="token punctuation">;</span>
+            next<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">=</span>k<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> next<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
 
 
                 
@@ -602,7 +627,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://2hu0.github.io/2021/09/12/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">https://2hu0.github.io/2021/09/12/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</a>
+                    <a href="https://2hu0.github.io/2021/09/13/KMP%E7%AE%97%E6%B3%95/">https://2hu0.github.io/2021/09/13/KMP%E7%AE%97%E6%B3%95/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -811,9 +836,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2021/09/13/KMP%E7%AE%97%E6%B3%95/">
                     <div class="card-image">
@@ -831,9 +857,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-09-13
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-09-13
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -842,6 +868,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -860,13 +887,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/09/12/hello-world/">
+                <a href="/2021/09/12/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="单链表的冒泡排序">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">单链表的冒泡排序</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -886,6 +913,14 @@
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                        <span class="chip bg-color">数据结构</span>
+                    </a>
+                    
                 </div>
                 
             </div>
