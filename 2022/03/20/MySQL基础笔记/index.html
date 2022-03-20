@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="Hello World, 2hu0のBlog">
+    <meta name="keywords" content="MySQL基础笔记, 2hu0のBlog">
     <meta name="description" content="123">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | 2hu0のBlog</title>
+    <title>MySQL基础笔记 | 2hu0のBlog</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -315,7 +315,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">MySQL基础笔记</h1>
                 </div>
             </div>
         </div>
@@ -429,9 +429,13 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/MySQL/">
+                                <span class="chip bg-color">MySQL</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -443,7 +447,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-09-12
+                    2022-03-20
                 </div>
                 
 
@@ -452,14 +456,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    75
+                    3.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    13 分
                 </div>
                 
 
@@ -482,19 +486,662 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-none"><code class="language-none">$ hexo new &quot;My New Post&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+                <h2 id="语法分类"><a href="#语法分类" class="headerlink" title="语法分类"></a>语法分类</h2><ul>
+<li>DDL：数据库定义语言，用来定义数据库对象(数据库、表、字段)</li>
+<li>DML:  数据操作语言，用来对数据库中的数据进行增删改</li>
+<li>DQL：数据查询语言，用来查询数据库中表的记录</li>
+<li>DCL：数据控制语言，用来创建数据库用户、控制数据库的控制权限</li>
+</ul>
+<h3 id="DDL（数据定义语言）"><a href="#DDL（数据定义语言）" class="headerlink" title="DDL（数据定义语言）"></a>DDL（数据定义语言）</h3><p>数据定义语言</p>
+<h4 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h4><p>查询所有数据库：</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SHOW DATABASES;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>查询当前数据库：</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT DATABASE();<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="line-numbers language-none"><code class="language-none">$ hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>创建数据库：</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE DATABASES[IF NOT EXISTS]数据库名[DEFAULT CHARSET 字符集][COLLATE 排序规则];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>删除数据库：</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">DROP DATABASE[IF EXISTS] 数据库名;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="line-numbers language-none"><code class="language-none">$ hexo generate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>使用数据库:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">USE 数据库名;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h5 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h5><ul>
+<li>UTF8字符集长度为3字节，有些符号占4字节，所以推荐用utf8mb4字符集</li>
+</ul>
+<h4 id="表操作"><a href="#表操作" class="headerlink" title="表操作"></a>表操作</h4><p>查询当前数据库所有的表:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SHOW TABLES;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>查询表结构:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">DESC 表名;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>查询指定表的建表语句：</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SHOW CREATE TABLE 表名;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>创建表:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE 表名(
+    字段1 字段1类型 [COMMENT 字段1注释],
+    字段2 字段2类型 [COMMENT 字段2注释],
+    字段3 字段3类型 [COMMENT 字段3注释],
+    ...
+    字段n 字段n类型 [COMMENT 字段n注释]
+)[ COMMENT 表注释 ];<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>注意最后一个字段后面是没有逗号的</p>
+<p>添加字段:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">ALTER TABLE 表名 ADD 字段名 类型(长度) [COMMENT 注释] [约束];
+-- 例子
+ALTER TABLE emp ADD nickname varchar(20) COMMENT &#39;昵称&#39;;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>修改数据类型:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">ALTER TABLE 表名 MODIFY 字段名 新数据类型(长度);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>修改字段名和字段类型:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">ALTER TABLE 表名 CHANGE 旧字段名 新字段名 类型(长度)[COMMENT 注释][约束]; 
+-- 例子：将emp表的nickname字段修改为username,类型为varchar(30)
+ALTER TABLE emp CHANGE nickname username varchar(30) COMMENT &#39;昵称&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>删除字段:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">ALTER TABLE 表名 DROP 字段名;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>修改表名:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">ALTER TABLE 表名 RENAME TO 新表名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>删除表:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">DROP TABLE [IF EXISTS] 表名;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>删除表，并且重新创建该表:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">TRUNCATE TABLE 表名;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="DML-数据库操作语言"><a href="#DML-数据库操作语言" class="headerlink" title="DML(数据库操作语言)"></a>DML(数据库操作语言)</h3><h4 id="添加数据"><a href="#添加数据" class="headerlink" title="添加数据"></a>添加数据</h4><p>指定字段:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO 表名(字段1,字段2,....) VALUES(值1,值2,...);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>全部字段:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO 表名 VALUES (值1,值2,....);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>批量添加数据:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">INSERT INTO 表名 (字段名1, 字段名2, ...) VALUES (值1, 值2, ...), (值1, 值2, ...), (值1, 值2, ...);
+INSERT INTO 表名 VALUES (值1, 值2, ...), (值1, 值2, ...), (值1, 值2, ...);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h5 id="注意事项-1"><a href="#注意事项-1" class="headerlink" title="注意事项"></a>注意事项</h5><ul>
+<li>字符串和日期类型应该包含在引号中</li>
+<li>插入的数据大小应该在字段的指定范围内</li>
+</ul>
+<h4 id="更新和删除数据"><a href="#更新和删除数据" class="headerlink" title="更新和删除数据"></a>更新和删除数据</h4><p>修改数据:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">UPDATE 表名 SET 字段名1 &#x3D; 值1,字段名2 &#x3D; 值2,...[WHERE 条件];
+-- 例子
+UPDATE emp SET name &#x3D; &#39;Jack&#39; WHERE id &#x3D; 1;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>删除数据:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">DELETE FROM 表名[WHERE 条件];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="DQL-数据查询语言"><a href="#DQL-数据查询语言" class="headerlink" title="DQL(数据查询语言)"></a>DQL(数据查询语言)</h3><p>语法:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT
+    字段列表
+FROM
+    表名字段
+WHERE
+    条件列表
+GROUP BY
+    分组字段列表
+HAVING
+    分组后的条件列表
+ORDER BY
+    排序字段列表
+LIMIT
+    分页参数<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="基础查询"><a href="#基础查询" class="headerlink" title="基础查询"></a>基础查询</h4><p>查询多个字段:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT 字段1, 字段2, 字段3, ... FROM 表名;
+SELECT * FROM 表名;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>设置别名:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT 字段1 [ AS 别名1 ], 字段2 [ AS 别名2 ], 字段3 [ AS 别名3 ], ... FROM 表名;
+SELECT 字段1 [ 别名1 ], 字段2 [ 别名2 ], 字段3 [ 别名3 ], ... FROM 表名;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>去重:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT DISTINCT 字段列表 FROM 表名;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>转义:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT * FROM 表名 WHERE name LIKE &#39;&#x2F;_张三&#39; ESCAPE &#39;&#x2F;&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h4><pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT 字段列表 FROM 表名 WHERE 条件列表;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>条件：</p>
+<table>
+<thead>
+<tr>
+<th align="center">比较运算符</th>
+<th align="left">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&lt;&gt; 或！=</td>
+<td align="left">不等于</td>
+</tr>
+<tr>
+<td align="center">BETWEEN…AND…</td>
+<td align="left">在某个范围内(含最小和最大)</td>
+</tr>
+<tr>
+<td align="center">IN(…)</td>
+<td align="left">在in之后的列表中的值,多选一</td>
+</tr>
+<tr>
+<td align="center">LIKE 占位符</td>
+<td align="left">模糊匹配(_匹配单个字符，%匹配任意个字符)</td>
+</tr>
+<tr>
+<td align="center">IS NULL</td>
+<td align="left">是NULL</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>逻辑运算符</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AND或&amp;&amp;</td>
+<td>并且(多个条件同时成立)</td>
+</tr>
+<tr>
+<td>OR或者||</td>
+<td>或者(多个条件任意一个成立)</td>
+</tr>
+<tr>
+<td>NOT或！</td>
+<td>非，不是</td>
+</tr>
+</tbody></table>
+<p>例子:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">-- 没有身份证
+select * from employee where idcard is null or idcard &#x3D; &#39;&#39;;
+-- 有身份证
+select * from employee where idcard;
+select * from employee where idcard is not null;
+-- 年龄在20到30之间
+select * from employee where age between 20 and 30;
+select * from employee where age &gt;&#x3D; 20 and age &lt;&#x3D; 30;
+-- 下面语句不报错，但查不到任何信息
+select * from employee where age between 30 and 20;
+-- 性别为女且年龄小于30
+select * from employee where age &lt; 30 and gender &#x3D; &#39;女&#39;;
+-- 年龄等于25或30或35
+select * from employee where age &#x3D; 25 or age &#x3D; 30 or age &#x3D; 35;
+select * from employee where age in (25, 30, 35);
+-- 姓名为两个字
+select * from employee where name like &#39;__&#39;;
+-- 身份证最后为X
+select * from employee where idcard like &#39;%X&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="聚合查询"><a href="#聚合查询" class="headerlink" title="聚合查询"></a>聚合查询</h4><p>一些常见的聚合函数:</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th align="left">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>count</td>
+<td align="left">统计数量</td>
+</tr>
+<tr>
+<td>max</td>
+<td align="left">最大值</td>
+</tr>
+<tr>
+<td>min</td>
+<td align="left">最小值</td>
+</tr>
+<tr>
+<td>avg</td>
+<td align="left">平均值</td>
+</tr>
+<tr>
+<td>sum</td>
+<td align="left">求和</td>
+</tr>
+</tbody></table>
+<p>语法:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT 聚合函数(字段列表) FROM 表名;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>例子:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT count(id) FROM employee WHERE workaddress &#x3D; &quot;广东省&quot;;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="分组查询"><a href="#分组查询" class="headerlink" title="分组查询"></a>分组查询</h4><p>语法:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT 字段列表 FROM 表名 [WHERE 条件] GROUP BY 分组字段名[HAVING 分组后的过滤条件];<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>where和having的区别:</p>
+<ul>
+<li>执行时机不同:where是<strong>分组之前</strong>进行过滤,不满足where条件不参与分组；having是<strong>分组之后</strong>对结果进行过滤。</li>
+<li>判断条件不同:where不能对聚合函数进行判断,而having可以</li>
+</ul>
+<p>例子:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">-- 根据性别分组，统计男性和女性数量（只显示分组数量，不显示哪个是男哪个是女）
+select count(*) from employee group by gender;
+-- 根据性别分组，统计男性和女性数量
+select gender, count(*) from employee group by gender;
+-- 根据性别分组，统计男性和女性的平均年龄
+select gender, avg(age) from employee group by gender;
+-- 年龄小于45，并根据工作地址分组
+select workaddress, count(*) from employee where age &lt; 45 group by workaddress;
+-- 年龄小于45，并根据工作地址分组，获取员工数量大于等于3的工作地址
+select workaddress, count(*) address_count from employee where age &lt; 45 group by workaddress having address_count &gt;&#x3D; 3;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="注意事项-2"><a href="#注意事项-2" class="headerlink" title="注意事项:"></a>注意事项:</h5><ul>
+<li>执行顺序:where &gt;聚合函数&gt;having</li>
+<li>分组之后,查询的字段一般为聚合函数和分段函数,查询其他字段无任何意义</li>
+</ul>
+<h4 id="排序查询"><a href="#排序查询" class="headerlink" title="排序查询"></a>排序查询</h4><p>语法:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT 字段列表 FROM 表名 ORDER BY 字段1 排序方式1,字段2 排序方式2;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>排序方式:</p>
+<ul>
+<li>ASC：升序(默认)</li>
+<li>DESC：降序</li>
+</ul>
+<p>例子：</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">-- 根据年龄升序排序
+SELECT * FROM employee ORDER BY age ASC;
+SELECT * FROM employee ORDER BY age;
+-- 两字段排序,根据年龄升序排序,入职时间降序排序
+SELECT * FROM employee ORDER BY age ASC, entrydata DESC;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="注意事项-3"><a href="#注意事项-3" class="headerlink" title="注意事项"></a>注意事项</h5><p>如果是多字段排序，当第一个字段值相同时，才会根据第二个字段进行排序</p>
+<h4 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h4><p>语法:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT 字段列表 FROM 表名 LIMIT 起始索引,查询记录数;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>例子:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">-- 查询第一页数据，展示10条
+SELECT * FROM employee LIMIT 0, 10;
+-- 查询第二页
+SELECT * FROM employee LIMIT 10, 10;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="注意事项-4"><a href="#注意事项-4" class="headerlink" title="注意事项"></a>注意事项</h5><ul>
+<li>起始索引从0开始,起始索引 = (查询页码-1)*每页显示记录数</li>
+<li>分页查询是数据库的方言，不同的的数据库有不同的实现</li>
+<li>如果查询的是第一页的数据,起始索引可以省略,直接简写LIMIT 10</li>
+</ul>
+<h3 id="DQL执行顺序"><a href="#DQL执行顺序" class="headerlink" title="DQL执行顺序"></a>DQL执行顺序</h3><p>FROM-&gt;WHERE-&gt;GROUP BY-&gt;SELECT-&gt;ORDER BY -&gt;LIMIT</p>
+<h3 id="DCL"><a href="#DCL" class="headerlink" title="DCL"></a>DCL</h3><h4 id="管理用户"><a href="#管理用户" class="headerlink" title="管理用户"></a>管理用户</h4><p>查询用户</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">USER mysql;
+SELECT * FROM user;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>创建用户:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE USER &#39;用户名&#39;@&#39;主机名&#39; IDENTIFIED BY &#39;密码&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>修改用户密码:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">ALTER USER &#39;用户名&#39;@&#39;主机名&#39; IDENTIFIED WITH mysql_native_password BY &#39;新密码&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>删除用户:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">DROP USER &#39;用户名&#39;@&#39;主机名&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>例子:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">-- 创建用户test，只能在当前主机localhost访问
+create user &#39;test&#39;@&#39;localhost&#39; identified by &#39;123456&#39;;
+-- 创建用户test，能在任意主机访问
+create user &#39;test&#39;@&#39;%&#39; identified by &#39;123456&#39;;
+create user &#39;test&#39; identified by &#39;123456&#39;;
+-- 修改密码
+alter user &#39;test&#39;@&#39;localhost&#39; identified with mysql_native_password by &#39;1234&#39;;
+-- 删除用户
+drop user &#39;test&#39;@&#39;localhost&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="注意事项-5"><a href="#注意事项-5" class="headerlink" title="注意事项"></a>注意事项</h5><ul>
+<li>主机名可以用%通配</li>
+</ul>
+<h4 id="权限控制"><a href="#权限控制" class="headerlink" title="权限控制"></a>权限控制</h4><p>常用权限:</p>
+<table>
+<thead>
+<tr>
+<th>权限</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ALL, ALL PRIVILEGES</td>
+<td>所有权限</td>
+</tr>
+<tr>
+<td>SELECT</td>
+<td>查询数据</td>
+</tr>
+<tr>
+<td>INSERT</td>
+<td>插入数据</td>
+</tr>
+<tr>
+<td>UPDATE</td>
+<td>修改数据</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>删除数据</td>
+</tr>
+<tr>
+<td>ALTER</td>
+<td>修改表</td>
+</tr>
+<tr>
+<td>DROP</td>
+<td>删除数据库/表/视图</td>
+</tr>
+<tr>
+<td>CREATE</td>
+<td>创建数据库/表</td>
+</tr>
+</tbody></table>
+<p>查询权限:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SHOW GRANTS FOR &#39;用户名&#39;@&#39;主机名&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>授予权限:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">GRANT 权限列表 ON 数据库名.表名 TO &#39;用户名&#39;@&#39;主机名&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>撤销权限:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">REVOKE 权限列表 ON 数据库名.表名 FROM &#39;用户名&#39;@&#39;主机名&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h5 id="注意事项-6"><a href="#注意事项-6" class="headerlink" title="注意事项:"></a>注意事项:</h5><ul>
+<li>多个权限之间用逗号分隔</li>
+<li>授权时,数据库名和表名可以用*进行通配,代表所有</li>
+</ul>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><ul>
+<li>字符串函数</li>
+<li>数值函数</li>
+<li>日期函数</li>
+<li>流程函数</li>
+</ul>
+<h4 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h4><p>常用函数:</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CONCAT(s1, s2, …, )</td>
+<td>字符串拼接，将s1, s2, …, 拼接成一个字符串</td>
+</tr>
+<tr>
+<td>LOWER(str)</td>
+<td>将字符串全部转为小写</td>
+</tr>
+<tr>
+<td>UPPER(str)</td>
+<td>将字符串全部转为大写</td>
+</tr>
+<tr>
+<td>LPAD(str, n, pad)</td>
+<td>左填充，用字符串pad对str的左边进行填充，达到n个字符串长度</td>
+</tr>
+<tr>
+<td>RPAD(str, n, pad)</td>
+<td>右填充，用字符串pad对str的右边进行填充，达到n个字符串长度</td>
+</tr>
+<tr>
+<td>TRIM(str)</td>
+<td>去掉字符串头部和尾部的空格</td>
+</tr>
+<tr>
+<td>SUBSTRING(str, start, length)</td>
+<td>返回从字符串str从start位置起的length个长度的字符串</td>
+</tr>
+</tbody></table>
+<p>例子:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">-- 拼接
+SELECT CONCAT(&#39;Hello&#39;, &#39;World&#39;);
+-- 小写
+SELECT LOWER(&#39;Hello&#39;);
+-- 大写
+SELECT UPPER(&#39;Hello&#39;);
+-- 左填充
+SELECT LPAD(&#39;01&#39;, 5, &#39;-&#39;);
+-- 右填充
+SELECT RPAD(&#39;01&#39;, 5, &#39;-&#39;);
+-- 去除空格
+SELECT TRIM(&#39; Hello World &#39;);
+-- 切片（起始索引为1）
+SELECT SUBSTRING(&#39;Hello World&#39;, 1, 5);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="数值函数"><a href="#数值函数" class="headerlink" title="数值函数"></a>数值函数</h4><p>常见函数:</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CEIL(x)</td>
+<td>向上取整</td>
+</tr>
+<tr>
+<td>FLOOR(x)</td>
+<td>向下取整</td>
+</tr>
+<tr>
+<td>MOD(x, y)</td>
+<td>返回x/y的模</td>
+</tr>
+<tr>
+<td>RAND()</td>
+<td>返回0~1内的随机数</td>
+</tr>
+<tr>
+<td>ROUND(x, y)</td>
+<td>求参数x的四舍五入值，保留y位小数</td>
+</tr>
+</tbody></table>
+<h4 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数"></a>日期函数</h4><p>常用函数:</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CURDATE()</td>
+<td>返回当前日期</td>
+</tr>
+<tr>
+<td>CURTIME()</td>
+<td>返回当前时间</td>
+</tr>
+<tr>
+<td>NOW()</td>
+<td>返回当前日期和时间</td>
+</tr>
+<tr>
+<td>YEAR(date)</td>
+<td>获取指定date的年份</td>
+</tr>
+<tr>
+<td>MONTH(date)</td>
+<td>获取指定date的月份</td>
+</tr>
+<tr>
+<td>DAY(date)</td>
+<td>获取指定date的日期</td>
+</tr>
+<tr>
+<td>DATE_ADD(date, INTERVAL expr type)</td>
+<td>返回一个日期/时间值加上一个时间间隔expr后的时间值</td>
+</tr>
+<tr>
+<td>DATEDIFF(date1, date2)</td>
+<td>返回起始时间date1和结束时间date2之间的天数</td>
+</tr>
+</tbody></table>
+<p>例子</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">-- DATE_ADD
+SELECT DATE_ADD(NOW(), INTERVAL 70 YEAR);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>流程函数:</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>IF(value,t,f)</td>
+<td>如果value为true，则返回t，否则返回f</td>
+</tr>
+<tr>
+<td>IFNULL(value1, value2)</td>
+<td>如果value1不为空，返回value1，否则返回value2</td>
+</tr>
+<tr>
+<td>CASE WHEN [ val1 ] THEN [ res1 ] … ELSE [ default ] END</td>
+<td>如果val1为true，返回res1，… 否则返回default默认值</td>
+</tr>
+<tr>
+<td>CASE [ expr ] WHEN [ val1 ] THEN [ res1 ] … ELSE [ default ] END</td>
+<td>如果expr的值等于val1，返回res1，… 否则返回default默认值</td>
+</tr>
+</tbody></table>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">select
+    name,
+    (case when age &gt; 30 then &#39;中年&#39; else &#39;青年&#39; end)
+from employee;
+select
+    name,
+    (case workaddress when &#39;北京市&#39; then &#39;一线城市&#39; when &#39;上海市&#39; then &#39;一线城市&#39; else &#39;二线城市&#39; end) as &#39;工作地址&#39;
+from employee;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h3><p>分类:</p>
+<table>
+<thead>
+<tr>
+<th>约束</th>
+<th>描述</th>
+<th>关键字</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>非空约束</td>
+<td>限制该字段的数据不能为null</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td>唯一约束</td>
+<td>保证该字段的所有数据都是唯一、不重复的</td>
+<td>UNIQUE</td>
+</tr>
+<tr>
+<td>主键约束</td>
+<td>主键是一行数据的唯一标识,要求非空且唯一</td>
+<td>PRIMARY KEY</td>
+</tr>
+<tr>
+<td>默认约束</td>
+<td>保存数据时，如果未指定该字段的值，则采用默认值</td>
+<td>DEFAULT</td>
+</tr>
+<tr>
+<td>检查约束(8.0.1版本后)</td>
+<td>保证字符值满足某一个条件</td>
+<td>CHECK</td>
+</tr>
+<tr>
+<td>外键约束</td>
+<td>用来让两张图的数据之间完整建立连接,保证数据的一致性和完整性</td>
+<td>FOREIGN KEY</td>
+</tr>
+</tbody></table>
+<p>约束是作用于表中字段上的，可以在创建/修改表的时候添加约束。</p>
+<h4 id="常用的约束"><a href="#常用的约束" class="headerlink" title="常用的约束"></a>常用的约束</h4><table>
+<thead>
+<tr>
+<th>约束条件</th>
+<th>关键字</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>主键</td>
+<td>PRIMARY KEY</td>
+</tr>
+<tr>
+<td>自动增长</td>
+<td>AUTO_INCREMENT</td>
+</tr>
+<tr>
+<td>不为空</td>
+<td>NOT NULL</td>
+</tr>
+<tr>
+<td>唯一</td>
+<td>UNIQUE</td>
+</tr>
+<tr>
+<td>逻辑条件</td>
+<td>CHECK</td>
+</tr>
+<tr>
+<td>默认值</td>
+<td>DEFAULT</td>
+</tr>
+</tbody></table>
+<p>例子:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">create table user(
+    id int primary key auto_increment,
+    name varchar(10) not null unique,
+    age int check(age &gt; 0 and age &lt; 120),
+    status char(1) default &#39;1&#39;,
+    gender char(1)
+);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="外键约束"><a href="#外键约束" class="headerlink" title="外键约束"></a>外键约束</h4><p>添加外键:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">CREATE TABLE 表名(
+    字段名 字段类型,
+    ...
+    [CONSTRAINT] [外键名称] FOREIGN KEY(外键字段名) REFERENCES 主表(主表列名)
+);
+ALTER TABLE 表名 ADD CONSTRAINT 外键名称 FOREIGN KEY (外键字段名) REFERENCES 主表(主表列名);
+-- 例子
+alter table emp add constraint fk_emp_dept_id foreign key(dept_id) references dept(id);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>删除外键:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">ALTER TABLE 表名 DROP FOREIGN KEY 外键名;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="删除-更新行为"><a href="#删除-更新行为" class="headerlink" title="删除/更新行为"></a>删除/更新行为</h4><table>
+<thead>
+<tr>
+<th>行为</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>NO ACTION</td>
+<td>当在父表中删除/更新对应记录时，首先检查该记录是否有对应外键，如果有则不允许删除/更新（与RESTRICT一致）</td>
+</tr>
+<tr>
+<td>RESTRICT</td>
+<td>当在父表中删除/更新对应记录时，首先检查该记录是否有对应外键，如果有则不允许删除/更新（与NO ACTION一致）</td>
+</tr>
+<tr>
+<td>CASCADE</td>
+<td>当在父表中删除/更新对应记录时，首先检查该记录是否有对应外键，如果有则也删除/更新外键在子表中的记录</td>
+</tr>
+<tr>
+<td>SET NULL</td>
+<td>当在父表中删除/更新对应记录时，首先检查该记录是否有对应外键，如果有则设置子表中该外键值为null（要求该外键允许为null）</td>
+</tr>
+<tr>
+<td>SET DEFAULT</td>
+<td>父表有变更时，子表将外键设为一个默认值（Innodb不支持</td>
+</tr>
+</tbody></table>
+<p>更改删除/更新行为:</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">ALTER TABLE 表名 ADD CONSTRAINT 外键名称 FOREIGN KEY (外键字段) REFERENCES 主表名(主表字段名) ON UPDATE 行为 ON DELETE 行为;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 
                 
             </div>
@@ -521,7 +1168,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://2hu0.github.io/2021/09/12/hello-world/">https://2hu0.github.io/2021/09/12/hello-world/</a>
+                    <a href="https://2hu0.github.io/2022/03/20/MySQL%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/">https://2hu0.github.io/2022/03/20/MySQL%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -558,7 +1205,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/MySQL/">
+                                    <span class="chip bg-color">MySQL</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -727,7 +1378,7 @@
         repo: '2hu0.github.io',
         owner: '2hu0',
         admin: "2hu0",
-        id: '2021-09-12T11-33-50',
+        id: '2022-03-20T15-20-43',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -753,17 +1404,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/09/12/%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">
+                <a href="/2022/03/20/MySQL%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="单链表的冒泡排序">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="MySQL基础笔记">
                         
-                        <span class="card-title">单链表的冒泡排序</span>
+                        <span class="card-title">MySQL基础笔记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -773,9 +1425,55 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-09-12
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-20
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            2hu0
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MySQL/">
+                        <span class="chip bg-color">MySQL</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/09/13/KMP%E7%AE%97%E6%B3%95/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="KMP算法思路归纳">
+                        
+                        <span class="card-title">KMP算法思路归纳</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-09-13
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -792,44 +1490,6 @@
                     </a>
                     
                 </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/2021/09/12/hello-world/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
-                        
-                        <span class="card-title">Hello World</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-09-12
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            2hu0
-                            
-                        </span>
-                    </div>
-                </div>
-
                 
             </div>
         </div>
