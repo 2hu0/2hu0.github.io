@@ -12,7 +12,7 @@ $(function () {
     };
     var lang_name = code_language.replace("line-numbers", "").trim().replace("language-", "").trim();
 
-    // 首字母大写
+    // 首字母大�?
     // lang_name = lang_name.slice(0, 1).toUpperCase() + lang_name.slice(1);
     
     $(this).siblings(".code_lang").text(lang_name);
