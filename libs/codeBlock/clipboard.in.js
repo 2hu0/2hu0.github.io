@@ -4,63 +4,63 @@
 * https://zenorocha.github.io/clipboard.js
 * 
 * Licensed MIT ? Zeno Rocha
-*/ 
+*/
 ! function (t, e) {
     "object" == typeof exports && "object" == typeof module ? module.exports = e() : "function" == typeof define && define.amd ? define([], e) : "object" == typeof exports ? exports.ClipboardJS = e() : t.ClipboardJS = e()
-    }(this, function () {
+}(this, function () {
     return function (n) {
         var o = {};
-    
-    function r(t) {
-        if (o[t]) return o[t].exports;
-        var e = o[t] = {
-            i: t,
-            l: !1,
-            exports: {}
-        };
-        return n[t].call(e.exports, e, e.exports, r), e.l = !0, e.exports
-    }
-    return r.m = n, r.c = o, r.d = function (t, e, n) {
-        r.o(t, e) || Object.defineProperty(t, e, {
-            enumerable: !0,
-            get: n
-        })
-    }, r.r = function (t) {
-        "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(t, Symbol.toStringTag, {
-            value: "Module"
-        }), Object.defineProperty(t, "__esModule", {
-            value: !0
-        })
-    }, r.t = function (e, t) {
-        if (1 & t && (e = r(e)), 8 & t) return e;
-        if (4 & t && "object" == typeof e && e && e.__esModule) return e;
-        var n = Object.create(null);
-        if (r.r(n), Object.defineProperty(n, "default", {
+
+        function r(t) {
+            if (o[t]) return o[t].exports;
+            var e = o[t] = {
+                i: t,
+                l: !1,
+                exports: {}
+            };
+            return n[t].call(e.exports, e, e.exports, r), e.l = !0, e.exports
+        }
+        return r.m = n, r.c = o, r.d = function (t, e, n) {
+            r.o(t, e) || Object.defineProperty(t, e, {
+                enumerable: !0,
+                get: n
+            })
+        }, r.r = function (t) {
+            "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(t, Symbol.toStringTag, {
+                value: "Module"
+            }), Object.defineProperty(t, "__esModule", {
+                value: !0
+            })
+        }, r.t = function (e, t) {
+            if (1 & t && (e = r(e)), 8 & t) return e;
+            if (4 & t && "object" == typeof e && e && e.__esModule) return e;
+            var n = Object.create(null);
+            if (r.r(n), Object.defineProperty(n, "default", {
                 enumerable: !0,
                 value: e
             }), 2 & t && "string" != typeof e)
-            for (var o in e) r.d(n, o, function (t) {
-                return e[t]
-            }.bind(null, o));
-        return n
-    }, r.n = function (t) {
-        var e = t && t.__esModule ? function () {
-            return t.default
-        } : function () {
-            return t
-        };
-        return r.d(e, "a", e), e
-    }, r.o = function (t, e) {
-        return Object.prototype.hasOwnProperty.call(t, e)
-    }, r.p = "", r(r.s = 0)
-    
+                for (var o in e) r.d(n, o, function (t) {
+                    return e[t]
+                }.bind(null, o));
+            return n
+        }, r.n = function (t) {
+            var e = t && t.__esModule ? function () {
+                return t.default
+            } : function () {
+                return t
+            };
+            return r.d(e, "a", e), e
+        }, r.o = function (t, e) {
+            return Object.prototype.hasOwnProperty.call(t, e)
+        }, r.p = "", r(r.s = 0)
+
     }([function (t, e, n) {
         "use strict";
         var r = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (t) {
-                return typeof t
-            } : function (t) {
-                return t && "function" == typeof Symbol && t.constructor === Symbol && t !== Symbol.prototype ? "symbol" : typeof t
-            },
+            return typeof t
+        } : function (t) {
+            return t && "function" == typeof Symbol && t.constructor === Symbol && t !== Symbol.prototype ? "symbol" : typeof t
+        },
             i = function () {
                 function o(t, e) {
                     for (var n = 0; n < e.length; n++) {
@@ -75,107 +75,107 @@
             a = o(n(1)),
             c = o(n(3)),
             u = o(n(4));
-    
-    function o(t) {
-        return t && t.__esModule ? t : {
-            default: t
+
+        function o(t) {
+            return t && t.__esModule ? t : {
+                default: t
+            }
         }
-    }
-    var l = function (t) {
-        function o(t, e) {
-            ! function (t, e) {
-                if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function")
-            }(this, o);
-            var n = function (t, e) {
-                if (!t) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-                return !e || "object" != typeof e && "function" != typeof e ? t : e
-            }(this, (o.__proto__ || Object.getPrototypeOf(o)).call(this));
-            return n.resolveOptions(e), n.listenClick(t), n
-        }
-        return function (t, e) {
-            if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function, not " + typeof e);
-            t.prototype = Object.create(e && e.prototype, {
-                constructor: {
-                    value: t,
-                    enumerable: !1,
-                    writable: !0,
-                    configurable: !0
+        var l = function (t) {
+            function o(t, e) {
+                ! function (t, e) {
+                    if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function")
+                }(this, o);
+                var n = function (t, e) {
+                    if (!t) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+                    return !e || "object" != typeof e && "function" != typeof e ? t : e
+                }(this, (o.__proto__ || Object.getPrototypeOf(o)).call(this));
+                return n.resolveOptions(e), n.listenClick(t), n
+            }
+            return function (t, e) {
+                if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function, not " + typeof e);
+                t.prototype = Object.create(e && e.prototype, {
+                    constructor: {
+                        value: t,
+                        enumerable: !1,
+                        writable: !0,
+                        configurable: !0
+                    }
+                }), e && (Object.setPrototypeOf ? Object.setPrototypeOf(t, e) : t.__proto__ = e)
+            }(o, c.default), i(o, [{
+                key: "resolveOptions",
+                value: function () {
+                    var t = 0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : {};
+                    this.action = "function" == typeof t.action ? t.action : this.defaultAction, this.target = "function" == typeof t.target ? t.target : this.defaultTarget, this.text = "function" == typeof t.text ? t.text : this.defaultText, this.container = "object" === r(t.container) ? t.container : document.body
                 }
-            }), e && (Object.setPrototypeOf ? Object.setPrototypeOf(t, e) : t.__proto__ = e)
-        }(o, c.default), i(o, [{
-            key: "resolveOptions",
-            value: function () {
-                var t = 0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : {};
-                this.action = "function" == typeof t.action ? t.action : this.defaultAction, this.target = "function" == typeof t.target ? t.target : this.defaultTarget, this.text = "function" == typeof t.text ? t.text : this.defaultText, this.container = "object" === r(t.container) ? t.container : document.body
-            }
-        }, {
-            key: "listenClick",
-            value: function (t) {
-                var e = this;
-                this.listener = (0, u.default)(t, "click", function (t) {
-                    return e.onClick(t)
-                })
-            }
-        }, {
-            key: "onClick",
-            value: function (t) {
-                var e = t.delegateTarget || t.currentTarget;
-                this.clipboardAction && (this.clipboardAction = null), this.clipboardAction = new a.default({
-                    action: this.action(e),
-                    target: this.target(e),
-                    text: this.text(e),
-                    container: this.container,
-                    trigger: e,
-                    emitter: this
-                })
-            }
-        }, {
-            key: "defaultAction",
-            value: function (t) {
-                return s("action", t)
-            }
-        }, {
-            key: "defaultTarget",
-            value: function (t) {
-                var e = s("target", t);
-                if (e) return document.querySelector(e)
-            }
-        }, {
-            key: "defaultText",
-            value: function (t) {
-                return s("text", t)
-            }
-        }, {
-            key: "destroy",
-            value: function () {
-                this.listener.destroy(), this.clipboardAction && (this.clipboardAction.destroy(), this.clipboardAction = null)
-            }
-        }], [{
-            key: "isSupported",
-            value: function () {
-                var t = 0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : ["copy", "cut"],
-                    e = "string" == typeof t ? [t] : t,
-                    n = !!document.queryCommandSupported;
-                return e.forEach(function (t) {
-                    n = n && !!document.queryCommandSupported(t)
-                }), n
-            }
-        }]), o
-    }();
-    
-    function s(t, e) {
-        var n = "data-clipboard-" + t;
-        if (e.hasAttribute(n)) return e.getAttribute(n)
-    }
-    t.exports = l
-    
+            }, {
+                key: "listenClick",
+                value: function (t) {
+                    var e = this;
+                    this.listener = (0, u.default)(t, "click", function (t) {
+                        return e.onClick(t)
+                    })
+                }
+            }, {
+                key: "onClick",
+                value: function (t) {
+                    var e = t.delegateTarget || t.currentTarget;
+                    this.clipboardAction && (this.clipboardAction = null), this.clipboardAction = new a.default({
+                        action: this.action(e),
+                        target: this.target(e),
+                        text: this.text(e),
+                        container: this.container,
+                        trigger: e,
+                        emitter: this
+                    })
+                }
+            }, {
+                key: "defaultAction",
+                value: function (t) {
+                    return s("action", t)
+                }
+            }, {
+                key: "defaultTarget",
+                value: function (t) {
+                    var e = s("target", t);
+                    if (e) return document.querySelector(e)
+                }
+            }, {
+                key: "defaultText",
+                value: function (t) {
+                    return s("text", t)
+                }
+            }, {
+                key: "destroy",
+                value: function () {
+                    this.listener.destroy(), this.clipboardAction && (this.clipboardAction.destroy(), this.clipboardAction = null)
+                }
+            }], [{
+                key: "isSupported",
+                value: function () {
+                    var t = 0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : ["copy", "cut"],
+                        e = "string" == typeof t ? [t] : t,
+                        n = !!document.queryCommandSupported;
+                    return e.forEach(function (t) {
+                        n = n && !!document.queryCommandSupported(t)
+                    }), n
+                }
+            }]), o
+        }();
+
+        function s(t, e) {
+            var n = "data-clipboard-" + t;
+            if (e.hasAttribute(n)) return e.getAttribute(n)
+        }
+        t.exports = l
+
     }, function (t, e, n) {
         "use strict";
         var o, r = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (t) {
-                return typeof t
-            } : function (t) {
-                return t && "function" == typeof Symbol && t.constructor === Symbol && t !== Symbol.prototype ? "symbol" : typeof t
-            },
+            return typeof t
+        } : function (t) {
+            return t && "function" == typeof Symbol && t.constructor === Symbol && t !== Symbol.prototype ? "symbol" : typeof t
+        },
             i = function () {
                 function o(t, e) {
                     for (var n = 0; n < e.length; n++) {
@@ -301,7 +301,7 @@
             return e
         }
     }, function (t, e) {
-        function n() {}
+        function n() { }
         n.prototype = {
             on: function (t, e, n) {
                 var o = this.e || (this.e = {});
@@ -312,27 +312,27 @@
             },
             once: function (t, e, n) {
                 var o = this;
-    
-    ?    function r() {
-    ?        o.off(t, r), e.apply(n, arguments)
-    ?    }
-    ?    return r._ = e, this.on(t, r, n)
-    },
-    emit: function (t) {
-    ?    for (var e = [].slice.call(arguments, 1), n = ((this.e || (this.e = {}))[t] || []).slice(), o = 0, r = n.length; o < r; o++) n[o].fn.apply(n[o].ctx, e);
-    ?    return this
-    },
-    off: function (t, e) {
-    ?    var n = this.e || (this.e = {}),
-    ?        o = n[t],
-    ?        r = [];
-    ?    if (o && e)
-    ?        for (var i = 0, a = o.length; i < a; i++) o[i].fn !== e && o[i].fn._ !== e && r.push(o[i]);
-    ?    return r.length ? n[t] = r : delete n[t], this
-    }
-    
-    }, t.exports = n
-    
+
+                // ?    function r() {
+                // ?        o.off(t, r), e.apply(n, arguments)
+                // ?    }
+                // ?    return r._ = e, this.on(t, r, n)
+                // },
+                // emit: function (t) {
+                // ?    for (var e = [].slice.call(arguments, 1), n = ((this.e || (this.e = {}))[t] || []).slice(), o = 0, r = n.length; o < r; o++) n[o].fn.apply(n[o].ctx, e);
+                // ?    return this
+                // },
+                // off: function (t, e) {
+                // ?    var n = this.e || (this.e = {}),
+                // ?        o = n[t],
+                // ?        r = [];
+                // ?    if (o && e)
+                // ?        for (var i = 0, a = o.length; i < a; i++) o[i].fn !== e && o[i].fn._ !== e && r.push(o[i]);
+                // ?    return r.length ? n[t] = r : delete n[t], this
+            }
+
+        }, t.exports = n
+
     }, function (t, e, n) {
         var d = n(5),
             h = n(6);
@@ -371,25 +371,25 @@
         }
     }, function (t, e, n) {
         var a = n(7);
-    
-    function i(t, e, n, o, r) {
-        var i = function (e, n, t, o) {
-            return function (t) {
-                t.delegateTarget = a(t.target, n), t.delegateTarget && o.call(e, t)
-            }
-        }.apply(this, arguments);
-        return t.addEventListener(n, i, r), {
-            destroy: function () {
-                t.removeEventListener(n, i, r)
+
+        function i(t, e, n, o, r) {
+            var i = function (e, n, t, o) {
+                return function (t) {
+                    t.delegateTarget = a(t.target, n), t.delegateTarget && o.call(e, t)
+                }
+            }.apply(this, arguments);
+            return t.addEventListener(n, i, r), {
+                destroy: function () {
+                    t.removeEventListener(n, i, r)
+                }
             }
         }
-    }
-    t.exports = function (t, e, n, o, r) {
-        return "function" == typeof t.addEventListener ? i.apply(null, arguments) : "function" == typeof n ? i.bind(null, document).apply(null, arguments) : ("string" == typeof t && (t = document.querySelectorAll(t)), Array.prototype.map.call(t, function (t) {
-            return i(t, e, n, o, r)
-        }))
-    }
-    
+        t.exports = function (t, e, n, o, r) {
+            return "function" == typeof t.addEventListener ? i.apply(null, arguments) : "function" == typeof n ? i.bind(null, document).apply(null, arguments) : ("string" == typeof t && (t = document.querySelectorAll(t)), Array.prototype.map.call(t, function (t) {
+                return i(t, e, n, o, r)
+            }))
+        }
+
     }, function (t, e) {
         if ("undefined" != typeof Element && !Element.prototype.matches) {
             var n = Element.prototype;
@@ -402,4 +402,4 @@
             }
         }
     }])
-    });
+});

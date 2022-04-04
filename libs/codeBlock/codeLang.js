@@ -1,7 +1,6 @@
-// ä»£ç å—è¯­è¨€è¯†åˆ«
-
+// ´úÂë¿éÓïÑÔÊ¶±ğ
 $(function () {
-  var $highlight_lang = $('<div class="code_lang" title="ä»£ç è¯­è¨€"></div>');
+  var $highlight_lang = $('<div class="code_lang" title="´úÂëÓïÑÔ"></div>');
 
   $('pre').before($highlight_lang);
   $('pre').each(function () {
@@ -12,9 +11,9 @@ $(function () {
     };
     var lang_name = code_language.replace("line-numbers", "").trim().replace("language-", "").trim();
 
-    // é¦–å­—æ¯å¤§ï¿½?
+    // Ê××ÖÄ¸´óĞ´
     // lang_name = lang_name.slice(0, 1).toUpperCase() + lang_name.slice(1);
-    
+
     $(this).siblings(".code_lang").text(lang_name);
   });
 });
